@@ -19,5 +19,12 @@
         </ul>
       <% end %>
     </section>
+
+    <h2>Followers</h2>
+      <% facade.followers.each do |follower| %>
+        <ul class = 'follower'>
+          <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
+        </ul>
+      <% end %>
   </section>
 </section>
