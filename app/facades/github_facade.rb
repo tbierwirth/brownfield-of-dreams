@@ -5,4 +5,11 @@ class GithubFacade
       GithubRepo.new(repo)
     end
   end
+
+  def followers
+    service = GithubService.new
+    service.followers.map do |follower|
+      GithubFollower.new(follower)
+    end
+  end
 end
