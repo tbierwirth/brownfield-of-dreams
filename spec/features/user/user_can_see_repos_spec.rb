@@ -13,7 +13,6 @@ RSpec.describe 'User' do
 
       within(first('.repo')) do
         expect(page).to have_css('.name:not(:empty)')
-        expect(page).to have_link('.name')
       end
     end
   end
