@@ -9,11 +9,23 @@
   </ul>
   <section>
     <h1>Bookmarked Segments</h1>
+    <section class='bookmarks'>
+      <% bookmark_facade.tutorials.each do |tutorial| %>
+        <section id="tutorial-<%= tutorial.id %>">
+          <h4><%= tutorial.title %></h4>
+            <% tutorial.videos.each do |video| %>
+              <ul>
+                <li><%= video.title %></li>
+              </ul>
+            <% end %>
+        </section>
+      <% end %>
+    </section>
   </section>
   <section class='github'>
     <h1>Github</h1>
     <section class='repos'>
-      <% facade.repositories.each do |repo| %>
+      <% github_facade.repositories.each do |repo| %>
         <ul class='repo'>
           <li class='name'><%= link_to repo.name, repo.html_url %></li>
         </ul>
@@ -21,14 +33,14 @@
     </section>
 
     <h2>Followers</h2>
-      <% facade.followers.each do |follower| %>
+      <% github_facade.followers.each do |follower| %>
         <ul class = 'follower'>
           <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
         </ul>
       <% end %>
 
     <h2>Following</h2>
-      <% facade.following.each do |follower| %>
+      <% github_facade.following.each do |follower| %>
         <ul class = 'following'>
           <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
         </ul>
