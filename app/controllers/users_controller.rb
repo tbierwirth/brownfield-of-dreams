@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def show
     render locals: {
-      github_facade: GithubFacade.new,
+      github_facade: GithubFacade.new(current_user.github_token),
       bookmark_facade: BookmarkFacade.new(current_user)
     }
   end

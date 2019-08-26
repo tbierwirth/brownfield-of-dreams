@@ -1,6 +1,7 @@
 class Github::SessionsController < ApplicationController
   def create
     current_user.add_token('github', token, uid)
+    redirect_to dashboard_path
   end
 
   private

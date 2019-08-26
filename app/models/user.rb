@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :user_videos
   has_many :videos, through: :user_videos
+  has_many :user_tokens
 
   validates :email, uniqueness: true, presence: true
   validates_presence_of :password
@@ -15,6 +16,14 @@ class User < ApplicationRecord
   end
 
   def add_token(provider, token, uid)
-    binding.pry
+    user_tokens.create!(provider: provider, token: "token #{token}", uid: uid)
+  end
+
+  def github_authorized?
+    user_tokens.where(provider: "github").present?
+  end
+
+  def github_token
+    user_tokens.select(:token).where(provider: "github").pluck(:token).join
   end
 end
