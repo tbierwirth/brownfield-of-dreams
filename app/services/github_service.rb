@@ -1,4 +1,7 @@
 class GithubService
+  def initialize(token)
+    @token = token
+  end
 
   def repositories
     get_json('/user/repos')
@@ -15,7 +18,7 @@ class GithubService
   private
   def conn
     Faraday.new(url: 'https://api.github.com/') do |f|
-      f.headers['Authorization'] = ENV['GITHUB_API_KEY']
+      f.headers['Authorization'] = @token
       f.adapter Faraday.default_adapter
     end
   end

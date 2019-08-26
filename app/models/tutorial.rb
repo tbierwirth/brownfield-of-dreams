@@ -7,5 +7,4 @@ class Tutorial < ApplicationRecord
   validates_presence_of :description
   # validates_presence_of :thumbnail
   validates_presence_of :playlist_id
-  validates_presence_of :classroom
 end
