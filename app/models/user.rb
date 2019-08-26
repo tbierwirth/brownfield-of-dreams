@@ -13,4 +13,8 @@ class User < ApplicationRecord
             .where(user_videos: { user_id: self.id })
             .order('user_videos.created_at')
   end
+
+  def add_token(provider, token, uid)
+    binding.pry
+  end
 end
