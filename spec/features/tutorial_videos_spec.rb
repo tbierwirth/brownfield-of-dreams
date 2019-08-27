@@ -7,12 +7,11 @@ RSpec.describe "Tutorial Show Page" do
     visit root_path
     click_on tutorial_1.title
     expect(page).to have_content("This tutorial doesn't have any videos!")
-    save_and_open_page
+
     video_1 = create(:video, tutorial: tutorial_1)
 
     visit root_path
     click_on tutorial_1.title
     expect(page).to have_content(video_1.title)
-    save_and_open_page
   end
 end
