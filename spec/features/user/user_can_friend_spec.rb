@@ -13,13 +13,14 @@ RSpec.describe 'User Show Page' do
     repos = File.open('./spec/fixtures/repos.json')
     stub_request(:get, "https://api.github.com/user/repos").
       to_return(status: 200, body: repos)
+
+    @tyler = create(:user)
+    @tay = create(:user)
+    @tyler.user_tokens.create(provider: 'github', token: 'ji342n4o2', uid: '46985326')
+    @tay.user_tokens.create(provider: 'github', token: 'aknkl424', uid: '47490116')
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@tyler)
   end
   it "a user sees an add friend button next to a registered follower" do
-    tyler = create(:user)
-    tay = create(:user)
-    tyler.user_tokens.create(provider: 'github', token: 'ji342n4o2', uid: '46985326')
-    tay.user_tokens.create(provider: 'github', token: 'aknkl424', uid: '47490116')
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(tyler)
 
     visit dashboard_path
 
@@ -47,6 +48,14 @@ RSpec.describe 'User Show Page' do
     within '.friends' do
       expect(page).to have_css('.friend', count: 1)
     end
+  end
 
+  it "verifies inverse friendship" do
+    visit dashboard_path
+
+    within ".followers" do
+      click_on "Add as Friend"
+    end
+    binding.pry
   end
 end
