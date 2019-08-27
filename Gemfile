@@ -39,11 +39,14 @@ group :development, :test do
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'awesome_print'
-  gem 'webmock'
   gem 'simplecov'
-  gem 'vcr'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+end
+
+group :test do
+  gem 'webmock'
+  gem 'vcr'
 end
 
 group :development do
