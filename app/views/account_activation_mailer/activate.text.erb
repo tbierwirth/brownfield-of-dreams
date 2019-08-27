@@ -1,0 +1,3 @@
+Hello <%= @user.first_name %>,
+  Visit here to activate your account.
+  <%= url_for(host: "sleepy-woodland-37224.herokuapp.com", controller: 'activation', action: 'update', code: @user.activation_code) %>
