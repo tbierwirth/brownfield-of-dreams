@@ -6,7 +6,6 @@ class Video < ApplicationRecord
   validates_presence_of :title
   validates_presence_of :description
   validates_presence_of :video_id
-  validates_presence_of :thumbnail
   validates_presence_of :tutorial_id
   validates_presence_of :position
 end
