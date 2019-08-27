@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :generate_code
   has_many :user_videos
   has_many :videos, through: :user_videos
   has_many :user_tokens
@@ -29,5 +30,16 @@ class User < ApplicationRecord
 
   def github_token
     user_tokens.select(:token).where(provider: "github").pluck(:token).join
+  end
+
+  def activate
+    update_attribute(:activated, true)
+    save
+  end
+
+  private
+
+  def generate_code
+    self.activation_code = SecureRandom.urlsafe_base64
   end
 end
