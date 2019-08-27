@@ -33,12 +33,16 @@ RSpec.describe 'User Show Page' do
       expect(page).to_not have_button('Add as Friend')
     end
 
-    expect(page).to have_button('Add as Friend')
-    click_on 'Add as Friend'
+    within '.followers' do
+      expect(page).to have_button('Add as Friend')
+      click_on 'Add as Friend'
+    end
 
     expect(current_path).to eq(dashboard_path)
 
-    expect(page).to_not have_button('Add as Friend')
+    within '.followers' do
+      expect(page).to_not have_button('Add as Friend')
+    end
 
     within '.friends' do
       expect(page).to have_css('.friend', count: 1)

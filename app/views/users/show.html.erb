@@ -51,25 +51,29 @@
         <% end %>
       </section>
 
-      <h2>Followers</h2>
-        <% github_facade.followers.each do |follower| %>
-          <ul class = 'follower'>
-            <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
-            <% if follower.registered? && !follower.friended?(current_user.id) %>
-              <%= button_to 'Add as Friend', friendships_path(:friend_id => follower.user_id), method: :post %>
-            <% end %>
-          </ul>
-        <% end %>
+      <section class='followers'>
+        <h2>Followers</h2>
+          <% github_facade.followers.each do |follower| %>
+            <ul class = 'follower'>
+              <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
+              <% if follower.registered? && !follower.friended?(current_user.id) %>
+                <%= button_to 'Add as Friend', friendships_path(:friend_id => follower.user_id), method: :post %>
+              <% end %>
+            </ul>
+          <% end %>
+      </section>
 
-      <h2>Following</h2>
-        <% github_facade.following.each do |follower| %>
-          <ul class = 'following'>
-            <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
-            <% if follower.registered? && !follower.friended?(current_user.id) %>
-              <%= button_to 'Add as Friend', friendships_path(:friend_id => follower.user_id), method: :post %>
-            <% end %>
-          </ul>
-        <% end %>
+      <section class='following'>
+        <h2>Following</h2>
+          <% github_facade.following.each do |follower| %>
+            <ul class = 'following'>
+              <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
+              <% if follower.registered? && !follower.friended?(current_user.id) %>
+                <%= button_to 'Add as Friend', friendships_path(:friend_id => follower.user_id), method: :post %>
+              <% end %>
+            </ul>
+          <% end %>
+      </section>
     </section>
   <% end %>
 </section>
