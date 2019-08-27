@@ -26,28 +26,54 @@
       <% end %>
     </section>
   </section>
-  <section class='github'>
-    <h1>Github</h1>
-    <section class='repos'>
-      <% github_facade.repositories.each do |repo| %>
-        <ul class='repo'>
-          <li class='name'><%= link_to repo.name, repo.html_url %></li>
-        </ul>
-      <% end %>
-    </section>
 
-    <h2>Followers</h2>
-      <% github_facade.followers.each do |follower| %>
-        <ul class = 'follower'>
-          <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
+  <section class='friends'>
+    <h1>Friends</h1>
+    <% if current_user.friends.empty? %>
+      <p>No friends added</p>
+    <% else %>
+      <% current_user.friends.each do |friend| %>
+        <ul class='friend'>
+          <li class='name'><%= friend.first_name %></li>
         </ul>
       <% end %>
-
-    <h2>Following</h2>
-      <% github_facade.following.each do |follower| %>
-        <ul class = 'following'>
-          <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
-        </ul>
-      <% end %>
+    <% end %>
   </section>
+
+  <% if current_user.github_authorized? %>
+    <section class='github'>
+      <h1>Github</h1>
+      <section class='repos'>
+        <% github_facade.repositories.each do |repo| %>
+          <ul class='repo'>
+            <li class='name'><%= link_to repo.name, repo.html_url %></li>
+          </ul>
+        <% end %>
+      </section>
+
+      <section class='followers'>
+        <h2>Followers</h2>
+          <% github_facade.followers.each do |follower| %>
+            <ul class = 'follower'>
+              <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
+              <% if follower.registered? && !follower.friended?(current_user.id) %>
+                <%= button_to 'Add as Friend', friendships_path(:friend_id => follower.user_id), method: :post %>
+              <% end %>
+            </ul>
+          <% end %>
+      </section>
+
+      <section class='following'>
+        <h2>Following</h2>
+          <% github_facade.following.each do |follower| %>
+            <ul class = 'following'>
+              <li class = 'login'><%= link_to follower.login, follower.html_url %></li>
+              <% if follower.registered? && !follower.friended?(current_user.id) %>
+                <%= button_to 'Add as Friend', friendships_path(:friend_id => follower.user_id), method: :post %>
+              <% end %>
+            </ul>
+          <% end %>
+      </section>
+    </section>
+  <% end %>
 </section>
