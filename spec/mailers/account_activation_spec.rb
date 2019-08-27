@@ -14,5 +14,6 @@ RSpec.describe AccountActivationMailer, type: :mailer do
     assert_equal ['no-reply@sleepy-woodland-37224.herokuapp.com'], email.from
     assert_equal [user.email], email.to
     assert_equal 'Account Activation', email.subject
+    expect(email).to have_content("sleepy-woodland-37224.herokuapp.com/activate?code=#{user.activation_code}")
   end
 end
