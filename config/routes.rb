@@ -38,16 +38,13 @@ Rails.application.routes.draw do
   get '/activate', to: 'activation#update', as: 'activation'
   get '/activated', to: 'activation#show', as: 'activated'
 
-  # Is this being used?
-  get '/video', to: 'video#show'
+  resources :users, only: [:new, :create]
 
-  resources :users, only: [:new, :create, :update, :edit]
-
-  resources :tutorials, only: [:show, :index] do
+  resources :tutorials, only: [:show] do
     resources :videos, only: [:show, :index]
   end
 
-  resources :user_videos, only:[:create, :destroy]
+  resources :user_videos, only:[:create]
 
   resources :friendships, only:[:create]
 end
