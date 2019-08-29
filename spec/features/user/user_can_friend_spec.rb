@@ -56,6 +56,5 @@ RSpec.describe 'User Show Page' do
     within ".followers" do
       click_on "Add as Friend"
     end
-    binding.pry
   end
 end
