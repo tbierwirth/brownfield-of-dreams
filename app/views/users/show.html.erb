@@ -9,6 +9,7 @@
   <% unless current_user.github_authorized? %>
     <%= button_to 'Connect to Github', github_auth_path, class: "btn btn-primary mb1 bg-teal" %>
   <% end %>
+  <%= button_to 'Send an Invite', invite_path, method: 'get', class: "btn btn-primary mb1 bg-teal" %>
 
   <h3>Account Details</h3>
   <ul>
