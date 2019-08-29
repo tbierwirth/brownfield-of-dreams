@@ -12,7 +12,15 @@ class GithubService
   end
 
   def following
-      get_json('/user/following')
+    get_json('/user/following')
+  end
+
+  def get_current_user
+    get_json('/user')[:login]
+  end
+
+  def get_user(handle)
+    get_json("/users/#{handle}")
   end
 
   private
