@@ -16,4 +16,10 @@ RSpec.describe UserToken, type: :model do
 
   expect(user_token).to be_a UserToken
   end
+
+  describe "validations" do
+    it { should validate_presence_of(:provider)}
+    it { should validate_presence_of(:token)}
+    it { should validate_presence_of(:uid)}
+  end
 end
