@@ -24,6 +24,12 @@ class Admin::VideosController < Admin::BaseController
     redirect_to edit_admin_tutorial_path(id: tutorial.id)
   end
 
+  def destroy
+    video = Video.find(params[:id])
+    video.destroy
+    redirect_to tutorials_path
+  end
+
   private
     def video_params
       params.permit(:position)
