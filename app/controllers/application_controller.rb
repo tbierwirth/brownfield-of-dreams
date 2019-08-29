@@ -1,10 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
-  helper_method :find_bookmark
-  helper_method :list_tags
-  helper_method :tutorial_name
   helper_method :require_user
-
 
   add_flash_types :success
 
@@ -14,14 +10,6 @@ class ApplicationController < ActionController::Base
 
   def require_user
     render file: 'public/404', status: 404 unless current_user
-  end
-
-  def find_bookmark(id)
-    current_user.user_videos.find_by(video_id: id)
-  end
-
-  def tutorial_name(id)
-    Tutorial.find(id).title
   end
 
   def four_oh_four
