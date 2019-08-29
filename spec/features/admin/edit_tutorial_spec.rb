@@ -4,12 +4,17 @@ describe "An Admin can edit a tutorial" do
   let(:tutorial) { create(:tutorial) }
   let(:admin)    { create(:admin) }
 
-  scenario "by adding a video", :js, :vcr do
+  scenario "by adding a video", :js do
+    youtube = File.open('./spec/fixtures/youtube.json')
+    stub_request(:get, "https://www.googleapis.com/youtube/v3/videos/J7ikFUlkP_k").
+      to_return(status: 200, body: youtube)
+
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(admin)
 
     visit edit_admin_tutorial_path(tutorial)
 
     click_on "Add Video"
+
 
     fill_in "video[title]", with: "How to tie your shoes."
     fill_in "video[description]", with: "Over, under, around and through, Meet Mr. Bunny Rabbit, pull and through."
